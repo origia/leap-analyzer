@@ -1,6 +1,8 @@
 class Bump
   include Mongoid::Document
 
+  belongs_to: :user
+
   before_create :set_time
 
   field :position, type: Integer
