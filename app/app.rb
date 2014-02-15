@@ -21,13 +21,17 @@ class LeapStatsApp < Sinatra::Base
     end
   end
 
-  post '/' do
+  post '/bump' do
     data = JSON.parse(request.body.read)
-    data[:position] = data.delete 'relativePosition'
-    Bump.create(data)
-    status 204
+    user = User.where(token: data['token']).first
+    if user.nil?
+      status 400
+      json error: 'not authorized'
+    else
+      data[:position] = data.delete 'relativePosition'
+      user.bumps.create(data)
+      status 204
+    end
   end
 
-  post '/position' do
-  end
 end
