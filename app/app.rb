@@ -19,6 +19,12 @@ class LeapStatsApp < Sinatra::Base
     json token: user.token
   end
 
+  post '/register' do
+    @user.device_token = @data['device_token']
+    @user.save
+    status 204
+  end
+
   post '/location' do
     if @user.update_position(@data)
       status 204
@@ -31,6 +37,7 @@ class LeapStatsApp < Sinatra::Base
   post '/bump' do
     @data[:position] = @data.delete 'relativePosition'
     @user.bumps.create(@data)
+    PushManager.push(@user.device_token, @data)
     status 204
   end
 

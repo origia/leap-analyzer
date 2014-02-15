@@ -6,12 +6,18 @@ class PushManager
       @apn = Houston::Client.production
     end
     @apn.certificate = File.read(Settings.apn.pem_file)
+    @apn.passphrase = Settings.apn.passphrase
   end
 
   def push(token, data)
     notification = Houston::Notification.new(device: token)
-    data.each { |k,v| notification.send(k, v) }
-    APN.push(notification)
+    notification.custom_data = data
+    @apn.push(notification)
+  end
+
+  def self.push(token, data)
+    @manager ||= PushManager.new
+    @manager.push(token, data)
   end
 
 end

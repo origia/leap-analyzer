@@ -4,6 +4,7 @@ class User
 
   field :location, type: Array
   field :token, type: String
+  field :device_token, type: String
 
   index({ location: "2d" }, { min: -200, max: 200 })
   index({ token: 1 }, { unique: true, name: "token_index" })
