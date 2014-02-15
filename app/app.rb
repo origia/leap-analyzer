@@ -27,6 +27,7 @@ class LeapStatsApp < Sinatra::Base
 
   post '/location' do
     if @user.update_position(@data)
+      @user.notify_nearby
       status 204
     else
       status 422

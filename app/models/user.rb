@@ -17,6 +17,14 @@ class User
     self.save
   end
 
+  def notify_nearby
+    to_notify = User.near(location: self.location)
+                    .max_distance(location: 10)
+    to_notify.each do |u|
+      PushManager.push(u.device_token, { position: 4 }) # TODO: give real position
+    end
+  end
+
   protected
   def set_token
     self.token = loop do
