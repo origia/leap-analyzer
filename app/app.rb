@@ -23,8 +23,8 @@ class LeapStatsApp < Sinatra::Base
     if @user.update_position(@data)
       status 204
     else
-      status 400
-      json error: 'bad request' # TODO: return proper error
+      status 422
+      json error: 'bad location'
     end
   end
 
