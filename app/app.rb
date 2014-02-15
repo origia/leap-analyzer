@@ -4,7 +4,9 @@ class LeapStatsApp < Sinatra::Base
   end
 
   post '/' do
-    puts JSON.parse(request.body.read)
+    data = JSON.parse(request.body.read)
+    data[:position] = data.delete 'relativePosition'
+    Bump.create(data)
     status 204
   end
 end
