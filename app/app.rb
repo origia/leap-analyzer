@@ -6,7 +6,7 @@ class LeapStatsApp < Sinatra::Base
   helpers Sinatra::JSON
 
   before /^(?!\/(token))/ do
-    @data = JSON.parse(request.body.read)
+    @data = JSON.parse(request.body.read) rescue {}
     @user = User.where(token: @data['token']).first
     if @user.nil?
       json error: 'not authenticated'
