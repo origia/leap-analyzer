@@ -10,6 +10,12 @@ class User
 
   has_many :bumps
 
+  def update_position(data)
+    return false unless data.has_key?('latitude') && data.has_key?('longitude')
+    self.location = [data['longitude'], data['latitude']]
+    true
+  end
+
   protected
   def set_token
     self.token = loop do
