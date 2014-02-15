@@ -12,6 +12,7 @@ class PushManager
   def push(token, data)
     notification = Houston::Notification.new(device: token)
     notification.custom_data = data
+    notification.content_available = 1
     @apn.push(notification)
   end
 
