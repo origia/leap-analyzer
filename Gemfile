@@ -5,3 +5,7 @@ gem 'sinatra-contrib'
 gem 'mongoid'
 gem 'houston'
 gem 'settingslogic'
+
+group :production do
+  gem 'unicorn'
+end
