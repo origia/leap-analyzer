@@ -17,6 +17,6 @@ class Bump
 
   def location_s
     return '' unless (!self.location.nil? && self.location.length == 2)
-    self.location[0].to_s + ',' + self.location[1].to_s
+    sprintf("%0.6f, %0.6f", self.location[0], self.location[1])
   end
 end
