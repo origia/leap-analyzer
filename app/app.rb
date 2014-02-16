@@ -16,7 +16,7 @@ class LeapStatsApp < Sinatra::Base
 
   get '/' do
     user = User.last
-    @bumps = user.bumps.limit(50)
+    @bumps = user.bumps.order_by({created_at: -1}).limit(50)
     slim :index
   end
 
