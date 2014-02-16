@@ -15,7 +15,7 @@ class LeapStatsApp < Sinatra::Base
   end
 
   get '/' do
-    user = User.first
+    user = User.last
     @bumps = user.bumps.limit(50)
     slim :index
   end
