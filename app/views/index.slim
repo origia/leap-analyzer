@@ -1,0 +1,14 @@
+h1 = "SmartWalk"
+
+table.table.table-striped
+  thead
+    tr
+      td = "時間"
+      td = "位置"
+      td = "方向"
+  tbody
+  - for bump in @bumps
+    tr
+      td = bump.created_at_s
+      td = bump.location_s
+      td = bump.position_s

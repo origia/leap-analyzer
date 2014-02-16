@@ -1,0 +1,21 @@
+{
+  "name": "leap-analyzer",
+  "version": "0.1.0",
+  "homepage": "https://github.com/origia/leap-analyzer",
+  "authors": [
+    "Daniel Perez <tuvistavie@gmail.com>"
+  ],
+  "description": "Analyzer for Leap data",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  }
+}

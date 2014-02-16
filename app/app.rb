@@ -5,13 +5,19 @@ class LeapStatsApp < Sinatra::Base
 
   helpers Sinatra::JSON
 
-  before /^(?!\/(token))/ do
+  before /^(?!\/(token|$))/ do
     @data = JSON.parse(request.body.read) rescue {}
     @user = User.where(token: @data['token']).first
     if @user.nil?
       json error: 'not authenticated'
       halt 403
     end
+  end
+
+  get '/' do
+    user = User.first
+    @bumps = user.bumps.limit(50)
+    slim :index
   end
 
   get '/token' do
@@ -37,7 +43,7 @@ class LeapStatsApp < Sinatra::Base
 
   post '/bump' do
     @data[:position] = @data.delete 'relativePosition'
-    @user.bumps.create(@data)
+    @user.bumps.create(@data.merge(location: user.location))
     PushManager.push(@user.device_token, @data)
     status 204
   end
