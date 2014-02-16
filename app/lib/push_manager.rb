@@ -14,7 +14,7 @@ class PushManager
     notification.custom_data = data.reject { |k| k.to_sym == :token }
     notification.content_available = 1
     if data.has_key? :position
-      notification.sound = (data[:position] & 0x04) == 0 ? 'migi' : 'hidari'
+      notification.sound = (data[:position] & 0x04) == 0 ? 'migi.mp4' : 'hidari.mp4'
     end
     @apn.push(notification)
   end
