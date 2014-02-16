@@ -43,7 +43,7 @@ class LeapStatsApp < Sinatra::Base
 
   post '/bump' do
     @data[:position] = @data.delete 'relativePosition'
-    @user.bumps.create(@data.merge(location: user.location))
+    @user.bumps.create(@data.merge(location: @user.location))
     PushManager.push(@user.device_token, @data)
     status 204
   end

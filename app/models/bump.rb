@@ -19,5 +19,4 @@ class Bump
     return '' unless (!self.location.nil? && self.location.length == 2)
     self.location[0].to_s + ',' + self.location[1].to_s
   end
-
 end
